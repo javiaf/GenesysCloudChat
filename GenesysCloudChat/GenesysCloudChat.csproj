@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChatBot.cs" />
     <Compile Include="ChatFormWindow.xaml.cs">
       <DependentUpon>ChatFormWindow.xaml</DependentUpon>
     </Compile>

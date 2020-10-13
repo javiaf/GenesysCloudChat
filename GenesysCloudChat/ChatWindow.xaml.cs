@@ -22,12 +22,19 @@ namespace GenesysCloudChat
     {
 
         private Chat chat;
+        private ChatBot chatBot;
         private string lastSender = String.Empty;
-        public ChatWindow()
+        public Boolean IsBot;
+        public ChatWindow(Boolean IsBot)
         {
             InitializeComponent();
-            chat = new Chat(this);
+            this.IsBot = IsBot;
             
+        }
+
+        public void Init(Chat chat, ChatBot chatBot) {
+            this.chat = chat;
+            this.chatBot = chatBot;
         }
 
         public void PutMessage(string message) {
@@ -41,19 +48,69 @@ namespace GenesysCloudChat
 
         private void End_Click(object sender, RoutedEventArgs e)
         {
-            chat.CreateChat();
+            chat.EndChat();
+        }
+
+        private void SendMessage()
+        {
+            if (!String.IsNullOrEmpty(tbMessage.Text))
+            {
+                chat.SendMessage(tbMessage.Text);
+                if (!lastSender.Equals("me"))
+                {
+                    tbConversation.Text += "Me:\n";
+                    lastSender = "me";
+                }
+                tbConversation.Text += tbMessage.Text + "\n";
+                tbMessage.Clear();
+            }
+        }
+
+        public void SendBotHistory(string botHistory) {
+            chat.SendMessage(botHistory);
+            tbConversation.Text += botHistory + "\n";
+        }
+
+        private void SendMessageBot()
+        {
+            if (!String.IsNullOrEmpty(tbMessage.Text))
+            {
+               
+                if (!lastSender.Equals("me"))
+                {
+                    tbConversation.Text += "Me:\n";
+                    lastSender = "me";
+                }
+                tbConversation.Text += tbMessage.Text + "\n";
+                chatBot.SendMessage(tbMessage.Text);
+                tbMessage.Clear();
+            }
+           
         }
 
         private void Send_Click(object sender, RoutedEventArgs e)
         {
-            chat.SendMessage(tbMessage.Text);
-            if (!lastSender.Equals("me")) {
-                tbConversation.Text += "Me:\n";
-                lastSender = "me";
+            if (!IsBot)
+            {
+                SendMessage();
             }
-            tbConversation.Text += tbMessage.Text+"\n";
-            tbMessage.Clear();
+            else {
+                SendMessageBot();
+            }
+        }
 
+        private void StopBot_Click(object sender, RoutedEventArgs e)
+        {
+            IsBot = false;
+            chatBot.FinishBot();
+        }
+
+        private void TbMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SendMessage();  
+            }
         }
     }
 }

@@ -17,10 +17,11 @@
         <TextBox
             x:Name="tbMessage"
             TextWrapping="Wrap"
-            AcceptsReturn="True"
-            VerticalScrollBarVisibility="Visible" Margin="47,344,150.6,33"></TextBox>
+            AcceptsReturn="False"
+             Margin="47,344,150.6,33" KeyDown="TbMessage_KeyDown"></TextBox>
         <Button Content="Send" HorizontalAlignment="Left" Margin="670,368,0,0" VerticalAlignment="Top" Width="75" Click="Send_Click"/>
-        <Button Name="EndBtn" Content="Start Chat" HorizontalAlignment="Left" Margin="670,344,0,0" VerticalAlignment="Top" Width="75" Click="End_Click"/>
-        
+        <Button Name="EndBtn" Content="End Chat" HorizontalAlignment="Left" Margin="670,344,0,0" VerticalAlignment="Top" Width="75" Click="End_Click"/>
+        <Button x:Name="StopBotBtn" Content="Stop Bot" HorizontalAlignment="Left" Margin="695,227,0,0" VerticalAlignment="Top" Width="75" Click="StopBot_Click"/>
+
     </Grid>
 </Window>

@@ -16,9 +16,9 @@ namespace GenesysCloudChat
 {
     public class Chat
     {
-        private string organizationId = ""; // YOUR ORGANIZATION ID
-        private string deploymentId = ""; // YOUR DEPLOYMENT ID
-        private string queueName = "Logitravel_Bookings";
+        private string organizationId = "3575a612-c2a6-42d9-92f4-fdc27ba5dc93"; // YOUR ORGANIZATION ID
+        private string deploymentId = "b9b42380-c180-40ab-8134-f0e3ee585681"; // YOUR DEPLOYMENT ID
+        private string queueName = "Logitravel Transporte";
         private string conversationId = String.Empty;
         private string memberId = String.Empty;
         private string bearerToken = String.Empty;
@@ -77,9 +77,13 @@ namespace GenesysCloudChat
             }
         }
 
-        public void CreateChat() {
+        public void CreateChat(string displayName, string firstName, string lastName, string phoneNumber, string email, string queue) {
+
+            this.queueName = queue;
+
             PureCloudRegionHosts region = PureCloudRegionHosts.eu_west_1;
             Configuration.Default.ApiClient.setBasePath(region);
+            
             CreateWebChatConversationRequest request = new CreateWebChatConversationRequest()
             {
                 OrganizationId = this.organizationId,
@@ -90,21 +94,26 @@ namespace GenesysCloudChat
                 },
                 MemberInfo = new GuestMemberInfo()
                 {
-                    DisplayName = "Test Name",
+                    DisplayName = displayName,
                     CustomFields = new Dictionary<string, string>()
                 }
             };
 
-            request.MemberInfo.CustomFields.Add("firstName", "Javier");
-            request.MemberInfo.CustomFields.Add("lastName", "Arguello");
-            request.MemberInfo.CustomFields.Add("phoneNumber", "637986292");
-           
+            request.MemberInfo.CustomFields.Add("firstName", firstName);
+            request.MemberInfo.CustomFields.Add("lastName", lastName);
+            request.MemberInfo.CustomFields.Add("phoneNumber", phoneNumber);
+            request.MemberInfo.CustomFields.Add("email", email);
+            request.MemberInfo.CustomFields.Add("bookingLocator", "B2W12Z");
+            request.MemberInfo.CustomFields.Add("oldName", "havi");
+            request.MemberInfo.CustomFields.Add("newName", "Javier");
+
+
             try
             {
                 // Create an ACD chat conversation from an external customer.
                 CreateWebChatConversationResponse result = apiInstance.PostWebchatGuestConversations(request);
-                conversationId = result.Id;
-                memberId = result.Member.Id;
+                this.conversationId = result.Id;
+                this.memberId = result.Member.Id;
                 Configuration.Default.ApiKey.Add("Authorization", "Bearer " + result.Jwt);
                 WebSocket ws = new WebSocket(result.EventStreamUri);
                 

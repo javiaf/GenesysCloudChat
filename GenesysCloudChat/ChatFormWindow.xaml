@@ -8,20 +8,22 @@
         Title="Window1" Height="450" Width="800">
     <Grid>
         <Label Content="Name" HorizontalAlignment="Left" Margin="72,76,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="72,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="NameTb" HorizontalAlignment="Left" Height="23" Margin="72,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Last Name" HorizontalAlignment="Left" Margin="250,76,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="250,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="LastNameTb" HorizontalAlignment="Left" Height="23" Margin="250,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Email" HorizontalAlignment="Left" Margin="72,146,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="72,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="209"/>
+        <TextBox Name="EmailTb" HorizontalAlignment="Left" Height="23" Margin="72,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="209"/>
         <Label Content="Phone" HorizontalAlignment="Left" Margin="72,210,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="72,237,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="PhoneTb" HorizontalAlignment="Left" Height="23" Margin="72,237,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Button Content="Start Chat!" HorizontalAlignment="Left" Margin="642,337,0,0" VerticalAlignment="Top" Width="75" Click="Start_Click"/>
         <Label Content="Select Queue:" HorizontalAlignment="Left" Margin="72,265,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="72,291,0,0" VerticalAlignment="Top" Width="209">
+        <ComboBox Name="QueueCB" HorizontalAlignment="Left" Margin="72,291,0,0" VerticalAlignment="Top" Width="209">
             <ComboBoxItem Content="Logitravel_Bookings" HorizontalAlignment="Left" Width="206.4"/>
             <ComboBoxItem Content="Logitravel_Checkout" HorizontalAlignment="Left" Width="206.4"/>
             <ComboBoxItem Content="Logitravel_ES" HorizontalAlignment="Left" Width="206.4"/>
         </ComboBox>
+        <Label Name="ErrorLabel" Content="" Foreground="Red" HorizontalAlignment="Left" Margin="349,371,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <Button Content="Bot First!" HorizontalAlignment="Left" Margin="547,337,0,0" VerticalAlignment="Top" Width="75" Click="BotFirst_Click"/>
 
     </Grid>
 </Window>
